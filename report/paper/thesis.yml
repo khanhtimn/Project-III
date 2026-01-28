@@ -1,0 +1,111 @@
+acheampong2021transformer:
+  type: article
+  title: "Transformer models for text-based emotion detection: a review of BERT-based approaches"
+  author:
+    - Acheampong, F. A.
+    - Nunoo-Mensah, H.
+    - Chen, W.
+  date: 2021
+  publisher: Artificial Intelligence Review
+  doi: 10.1007/s10462-021-09958-2
+
+webandbigdata2021:
+  type: book
+  title: "Web and Big Data"
+  author:
+    - U, L. H.
+    - Spaniol, M.
+    - Sakurai, Y.
+    - Chen, J.
+  date: 2021
+  publisher: Springer
+  doi: 10.1007/978-3-030-85896-4
+
+alammary2022:
+  type: article
+  title: "BERT Models for Arabic Text Classification: A Systematic Review"
+  author:
+    - Alammary, A.S.
+  date: 2022
+  publisher: Applied Sciences
+  doi: 10.3390/app12115720
+
+wu2021:
+  type: article
+  title: "BERT for Sentiment Classification in Software Engineering"
+  author:
+    - Wu, J.
+    - Ye, C.
+    - Zhou, H.
+  date: 2021
+  publisher: 2021 International Conference on Service Science (ICSS)
+  doi: 10.1109/ICSS53362.2021.00026
+
+galal2024:
+  type: article
+  title: "Rethinking of BERT sentence embedding for text classification"
+  author:
+    - Galal, O.
+    - Abdel-Gawad, A.H.
+    - Farouk, M.
+  date: 2024
+  publisher: Neural Comput & Applic
+  doi: 10.1007/s00521-024-10212-3
+
+ho2020:
+  type: article
+  title: "Emotion Recognition for Vietnamese Social Media Text"
+  author:
+    - Ho, V. A.
+    - Nguyen, D. H.
+    - Nguyen, D. H.
+    - Pham, L. T.
+    - Nguyen, D. V.
+
+nguyen2022:
+  type: article
+  title: "Is word segmentation necessary for Vietnamese sentiment classification?"
+  author:
+    - Nguyen, D. -V.
+    - Nguyen, N. L. -T.
+  date: 2022
+  publisher: 2022 RIVF International Conference on Computing and Communication Technologies (RIVF)
+  doi: 10.1109/RIVF55975.2022.10013874
+
+vaswani2023:
+  type: article
+  title: "Attention Is All You Need"
+  author:
+    - Vaswani, A.
+    - Shazeer, N.
+    - Parmar, N.
+    - Uszkoreit, J.
+    - Jones, L.
+    - Gomez, A. N.
+    - Kaiser, L.
+    - Polosukhin, I.
+  date: 2023
+  publisher: arXiv preprint arXiv:1706.03762
+  url: https://arxiv.org/abs/1706.03762
+
+devlin2019bertpretrainingdeepbidirectional:
+  type: article
+  title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"
+  author:
+    - Devlin, J.
+    - Chang, M. W.
+    - Lee, K.
+    - Toutanova, K.
+  date: 2019
+  publisher: arXiv preprint arXiv:1810.04805
+  url: https://arxiv.org/abs/1810.04805
+
+nguyen2020phobertpretrainedlanguagemodels:
+  type: article
+  title: "PhoBERT: Pre-trained language models for Vietnamese"
+  author:
+    - Nguyen, D. Q.
+    - Nguyen, A. T.
+  date: 2020
+  publisher: arXiv preprint arXiv:2003.00744
+  url: https://arxiv.org/abs/2003.00744
