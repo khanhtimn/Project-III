@@ -18,7 +18,7 @@
 #set par(justify: true)
 #include "/content/introduction.typ"
 #pagebreak()
-#include "/content/model_design.typ"
+// #include "/content/model_design.typ"
 #pagebreak()
 #include "/content/data_preprocessing.typ"
 #pagebreak()

@@ -1,0 +1,71 @@
+[project]
+name = "refrag"
+version = "0.1.0"
+description = "REFRAG - Retrieval-Enhanced Framework for RAG"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+    # Core ML frameworks
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
+    # Transformers & model loading
+    "transformers>=4.40.0",
+    "accelerate>=0.20.0",
+    "sentencepiece>=0.1.99",
+    "safetensors>=0.4.0",
+    # Vector databases
+    "faiss-cpu>=1.7.4",
+    "qdrant-client>=1.8.0",
+    # Embeddings
+    "sentence-transformers>=2.2.0",
+    # Evaluation
+    "sacrebleu>=2.3.0",
+    "rouge-score>=0.1.2",
+    # Utilities
+    "tqdm>=4.65.0",
+    "datasets>=2.14.0",
+    "tiktoken>=0.5.0",
+    # UI & Experiment Tracking
+    "streamlit>=1.40.0",
+    "mlflow>=2.10.0",
+    # Visualization
+    "plotly>=5.18.0",
+    "altair>=5.2.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
