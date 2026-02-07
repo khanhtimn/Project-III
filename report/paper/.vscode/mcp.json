@@ -1,0 +1,15 @@
+{
+	"servers": {
+		"morph-mcp": {
+			"command": "npx",
+			"args": ["-y", "@morphllm/morphmcp"],
+			"env": {
+				"MORPH_API_KEY": "sk-hNAissBXr3SBZlRgi2Ycd0tWY2SMDm533VsZ-odxUHPKYfx6",
+				"ENABLED_TOOLS": "edit_file,warpgrep_codebase_search"
+			}
+		},
+		"base-ui": {
+			"url": "https://base-ui-mcp.polv.workers.dev/mcp"
+		}
+	}
+}

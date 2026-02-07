@@ -34,7 +34,7 @@ You can use this repository as a template for your thesis. To do this, follow th
 Fill in your thesis details in the [`metadata.typ`](/metadata.typ) file: 
 * Degree (Bachelor or Master)
 * Your study program
-* English and German title
+* Title (in Vietnamese)
 * Advisor and supervisor
 * Your name (without e-mail address or matriculation number)
 * The start and submission date

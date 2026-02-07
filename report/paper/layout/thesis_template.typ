@@ -15,7 +15,7 @@
   advisors: (),
   author: "",
   submissionDate: "",
-  abstract: "",
+  abstract_content: "",
   acknowledgement: "",
   is_print: false,
   body,
@@ -54,7 +54,7 @@
 
   print_page_break(print: is_print)
 
-  // abstract(lang: "en")[#abstract]
+  abstract[#abstract_content]
 
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),
@@ -65,7 +65,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "vi"
   )
   
   show math.equation: set text(weight: 400)

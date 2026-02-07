@@ -2,19 +2,17 @@
 #import "/metadata.typ": *
 #import "/utils/todo.typ": *
 
-#set document(title: titleEnglish, author: author)
+#set document(title: title, author: author)
 
 #show: proposal.with(
-  title: titleEnglish,
-  titleGerman: titleGerman,
+  title: title,
   degree: subject,
-  program: subject_desc,
+  program: subject_description,
   supervisor: supervisor,
   advisors: advisors,
   author: author,
   startDate: startDate,
   submissionDate: submissionDate,
-  transparency_ai_tools: include "/content/proposal/transparency_ai_tools.typ",
 )
 
 #TODO(color: red)[ // Remove this block

@@ -1,5 +1,5 @@
 #import "/layout/titlepage.typ": *
-#import "/layout/transparency_ai_tools.typ": transparency_ai_tools as transparency_ai_tools_layout
+#import "/content/proposal/transparency_ai_tools.typ": *
 #import "/utils/print_page_break.typ": *
 #import "/layout/fonts.typ": *
 
@@ -8,7 +8,6 @@
 // Go ahead and customize it to your liking!
 #let proposal(
   title: "",
-  titleGerman: "",
   degree: "",
   program: "",
   supervisor: "",
@@ -16,19 +15,16 @@
   author: "",
   startDate: datetime,
   submissionDate: datetime,
-  transparency_ai_tools: "",
   is_print: false,
   body,
 ) = {
   titlepage(
     title: title,
-    titleGerman: titleGerman,
-    degree: degree,
-    program: program,
+    subject: degree,
+    subject_description: program,
     supervisor: supervisor,
     advisors: advisors,
     author: author,
-    startDate: startDate,
     submissionDate: submissionDate
   )
 
@@ -45,7 +41,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "vi"
   )
 
   show math.equation: set text(weight: 400)
@@ -73,6 +69,4 @@
 
   pagebreak()
   bibliography("/thesis.yml")
-  pagebreak()
-  transparency_ai_tools_layout(transparency_ai_tools)
 }

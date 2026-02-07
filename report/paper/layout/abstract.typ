@@ -1,8 +1,6 @@
 #import "/layout/fonts.typ": *
 
-#let abstract(body, lang: "en") = {
-  let title = (en: "Abstract", de: "Zusammenfassung")
-
+#let abstract(body) = {
   set page(
     margin: (left: 30mm, right: 30mm, top: 40mm, bottom: 40mm),
     numbering: none,
@@ -12,7 +10,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: lang
+    lang: "vi"
   )
 
   set par(
@@ -22,7 +20,7 @@
 
   // --- Abstract ---
   v(1fr)
-  align(center, text(font: fonts.body, 1em, weight: "semibold", title.at(lang)))
+  align(center, text(font: fonts.body, 1em, weight: "semibold", "Tóm tắt"))
   
   body
   

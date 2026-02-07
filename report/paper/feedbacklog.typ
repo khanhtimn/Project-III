@@ -2,10 +2,10 @@
 #import "/metadata.typ": *
 #import "/utils/feedback.typ": *
 
-#set document(title: titleEnglish, author: author)
+#set document(title: title, author: author)
 
 #show: feedbacklog.with(
-  titleEnglish: titleEnglish,
+  title: title,
   supervisor: supervisor,
   advisors: advisors,
   author: author,

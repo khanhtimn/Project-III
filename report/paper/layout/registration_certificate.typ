@@ -23,7 +23,7 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "vi"
   )
 
   align(

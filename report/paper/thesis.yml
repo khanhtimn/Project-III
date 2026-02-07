@@ -1,46 +1,3 @@
-acheampong2021transformer:
-  type: article
-  title: "Transformer models for text-based emotion detection: a review of BERT-based approaches"
-  author:
-    - Acheampong, F. A.
-    - Nunoo-Mensah, H.
-    - Chen, W.
-  date: 2021
-  publisher: Artificial Intelligence Review
-  doi: 10.1007/s10462-021-09958-2
-
-webandbigdata2021:
-  type: book
-  title: "Web and Big Data"
-  author:
-    - U, L. H.
-    - Spaniol, M.
-    - Sakurai, Y.
-    - Chen, J.
-  date: 2021
-  publisher: Springer
-  doi: 10.1007/978-3-030-85896-4
-
-alammary2022:
-  type: article
-  title: "BERT Models for Arabic Text Classification: A Systematic Review"
-  author:
-    - Alammary, A.S.
-  date: 2022
-  publisher: Applied Sciences
-  doi: 10.3390/app12115720
-
-wu2021:
-  type: article
-  title: "BERT for Sentiment Classification in Software Engineering"
-  author:
-    - Wu, J.
-    - Ye, C.
-    - Zhou, H.
-  date: 2021
-  publisher: 2021 International Conference on Service Science (ICSS)
-  doi: 10.1109/ICSS53362.2021.00026
-
 galal2024:
   type: article
   title: "Rethinking of BERT sentence embedding for text classification"
@@ -51,16 +8,6 @@ galal2024:
   date: 2024
   publisher: Neural Comput & Applic
   doi: 10.1007/s00521-024-10212-3
-
-ho2020:
-  type: article
-  title: "Emotion Recognition for Vietnamese Social Media Text"
-  author:
-    - Ho, V. A.
-    - Nguyen, D. H.
-    - Nguyen, D. H.
-    - Pham, L. T.
-    - Nguyen, D. V.
 
 nguyen2022:
   type: article
@@ -100,12 +47,345 @@ devlin2019bertpretrainingdeepbidirectional:
   publisher: arXiv preprint arXiv:1810.04805
   url: https://arxiv.org/abs/1810.04805
 
-nguyen2020phobertpretrainedlanguagemodels:
+roller2021recipes:
   type: article
-  title: "PhoBERT: Pre-trained language models for Vietnamese"
+  title: "Recipes for building an open-domain chatbot"
   author:
-    - Nguyen, D. Q.
-    - Nguyen, A. T.
+    - Roller, S.
+    - et al.
+  date: 2021
+  publisher: EACL
+
+zhang2020dialogue:
+  type: article
+  title: "An Empirical Study of Open-Domain Dialogue"
+  author:
+    - Zhang, S.
+    - et al.
   date: 2020
-  publisher: arXiv preprint arXiv:2003.00744
-  url: https://arxiv.org/abs/2003.00744
+  publisher: "2020"
+
+guu2020retrieval:
+  type: article
+  title: "Retrieval augmented language model pre-training"
+  author:
+    - Guu, K.
+    - et al.
+  date: 2020
+  publisher: ICML
+
+izacard2022few:
+  type: article
+  title: "Few-shot learning with retrieval augmented language models"
+  author:
+    - Izacard, G.
+    - et al.
+  date: 2022
+  publisher: arXiv preprint arXiv:2208.03299
+  url: https://arxiv.org/abs/2208.03299
+
+yen2024long:
+  type: article
+  title: "Long-context language modeling with parallel context encoding"
+  author:
+    - Yen, H.
+    - et al.
+  date: 2024
+  publisher: ACL
+
+beltagy2020longformer:
+  type: article
+  title: "Longformer: The long-document transformer"
+  author:
+    - Beltagy, I.
+    - et al.
+  date: 2020
+  publisher: arXiv preprint arXiv:2004.05150
+  url: https://arxiv.org/abs/2004.05150
+
+child2019generating:
+  type: article
+  title: "Generating long sequences with sparse transformers"
+  author:
+    - Child, R.
+    - et al.
+  date: 2019
+  publisher: arXiv preprint arXiv:1904.10509
+  url: https://arxiv.org/abs/1904.10509
+
+xiao2024efficient:
+  type: article
+  title: "Efficient streaming language models with attention sinks"
+  author:
+    - Xiao, G.
+    - et al.
+  date: 2024
+  publisher: ICLR
+
+jiang2024longllmlingua:
+  type: article
+  title: "LongLLMLingua: Accelerating and enhancing LLMs in long context scenarios via prompt compression"
+  author:
+    - Jiang, H.
+    - et al.
+  date: 2024
+  publisher: ACL
+
+choromanski2021performer:
+  type: article
+  title: "Rethinking attention with performers"
+  author:
+    - Choromanski, K.
+    - et al.
+  date: 2021
+  publisher: ICLR
+
+soboleva2023slimpajama:
+  type: article
+  title: "SlimPajama: A 627B token cleaned and deduplicated version of RedPajama"
+  author:
+    - Soboleva, D.
+    - et al.
+  date: 2023
+  publisher: "2023"
+
+rae2019pg19:
+  type: article
+  title: "Compressive transformers for long-range sequence modelling"
+  author:
+    - Rae, J. W.
+    - et al.
+  date: 2019
+  publisher: arXiv preprint arXiv:1911.05507
+  url: https://arxiv.org/abs/1911.05507
+
+azerbayev2023proofpile:
+  type: article
+  title: "ProofPile: A pre-training dataset of mathematical texts"
+  author:
+    - Azerbayev, Z.
+    - et al.
+  date: 2023
+  publisher: "2023"
+
+touvron2023llama2:
+  type: article
+  title: "LLaMA 2: Open foundation and fine-tuned chat models"
+  author:
+    - Touvron, H.
+    - et al.
+  date: 2023
+  publisher: arXiv preprint arXiv:2307.09288
+  url: https://arxiv.org/abs/2307.09288
+
+shi2024replug:
+  type: article
+  title: "REPLUG: Retrieval-augmented black-box language models"
+  author:
+    - Shi, W.
+    - et al.
+  date: 2024
+  publisher: NAACL
+
+lin2024radit:
+  type: article
+  title: "RA-DIT: Retrieval-augmented dual instruction tuning"
+  author:
+    - Lin, X. V.
+    - et al.
+  date: 2024
+  publisher: ICLR
+
+hendrycks2021mmlu:
+  type: article
+  title: "Measuring massive multitask language understanding"
+  author:
+    - Hendrycks, D.
+    - et al.
+  date: 2021
+  publisher: ICLR
+
+clark2019boolq:
+  type: article
+  title: "BoolQ: Exploring the surprising difficulty of natural yes/no questions"
+  author:
+    - Clark, C.
+    - et al.
+  date: 2019
+  publisher: NAACL
+
+sap2019socialiqa:
+  type: article
+  title: "Social IQa: Commonsense reasoning about social interactions"
+  author:
+    - Sap, M.
+    - et al.
+  date: 2019
+  publisher: EMNLP
+
+bisk2020piqa:
+  type: article
+  title: "PIQA: Reasoning about physical commonsense in natural language"
+  author:
+    - Bisk, Y.
+    - et al.
+  date: 2020
+  publisher: AAAI
+
+petroni2020kilt:
+  type: article
+  title: "KILT: A benchmark for knowledge intensive language tasks"
+  author:
+    - Petroni, F.
+    - et al.
+  date: 2020
+  publisher: arXiv preprint arXiv:2009.02252
+  url: https://arxiv.org/abs/2009.02252
+
+lin2023dragon:
+  type: article
+  title: "How to train your DRAGON"
+  author:
+    - Lin, S. -C.
+    - et al.
+  date: 2023
+  publisher: EMNLP
+
+izacard2023atlas:
+  type: article
+  title: "ATLAS: Few-shot learning with retrieval augmented language models"
+  author:
+    - Izacard, G.
+    - et al.
+  date: 2023
+  publisher: JMLR
+
+shi2024deepseekmath:
+  type: article
+  title: "DeepSeekMath: Pushing the limits of mathematical reasoning in open language models"
+  author:
+    - Shao, Z.
+    - et al.
+  date: 2024
+  publisher: arXiv preprint arXiv:2402.03300
+  url: https://arxiv.org/abs/2402.03300
+
+adlakha2022topiocqa:
+  type: article
+  title: "TopiOCQA: Open-domain conversational question answering with topic switching"
+  author:
+    - Adlakha, V.
+    - et al.
+  date: 2022
+  publisher: TACL
+
+qu2020orconvqa:
+  type: article
+  title: "Open-Retrieval Conversational Question Answering"
+  author:
+    - Qu, C.
+    - et al.
+  date: 2020
+  publisher: SIGIR
+
+anantha2021qrecc:
+  type: article
+  title: "Open-domain question answering goes conversational via question rewriting"
+  author:
+    - Anantha, R.
+    - et al.
+  date: 2021
+  publisher: NAACL
+
+borgeaud2022trillions:
+  type: article
+  title: "Improving language models by retrieving from trillions of tokens"
+  author:
+    - Borgeaud, S.
+    - et al.
+  date: 2022
+  publisher: ICML
+
+izacard2021fid:
+  type: article
+  title: "Leveraging passage retrieval with generative models for open domain question answering"
+  author:
+    - Izacard, G.
+    - Grave, E.
+  date: 2021
+  publisher: EACL
+
+rae2020compressive:
+  type: article
+  title: "Compressive transformers for long-range sequence modelling"
+  author:
+    - Rae, J. W.
+    - et al.
+  date: 2020
+  publisher: ICLR
+
+chevalier2023compress:
+  type: article
+  title: "Adapting language models to compress contexts"
+  author:
+    - Chevalier, A.
+    - et al.
+  date: 2023
+  publisher: EMNLP
+
+dai2025pcc:
+  type: article
+  title: "Pretraining context compressor for large language models with embedding-based memory"
+  author:
+    - Dai, Y.
+    - et al.
+  date: 2025
+  publisher: ACL
+
+kuratov2025cramming:
+  type: article
+  title: "Cramming 1568 tokens into a single vector and back again"
+  author:
+    - Kuratov, Y.
+    - et al.
+  date: 2025
+  publisher: ACL
+
+jiang2023llmlingua:
+  type: article
+  title: "LLMLingua: Compressing prompts for accelerated inference of large language models"
+  author:
+    - Jiang, H.
+    - et al.
+  date: 2023
+  publisher: EMNLP
+
+li2023compress:
+  type: article
+  title: "Compressing context to enhance inference efficiency of large language models"
+  author:
+    - Li, Y.
+    - et al.
+  date: 2023
+  publisher: EMNLP
+
+liskavets2024prompt:
+  type: article
+  title: "Prompt compression with context-aware sentence encoding for fast and improved LLM inference"
+  author:
+    - Liskavets, B.
+    - et al.
+  date: 2024
+  publisher: arXiv preprint arXiv:2409.01227
+  url: https://arxiv.org/abs/2409.01227
+
+schulman2017ppo:
+  type: article
+  title: "Proximal policy optimization algorithms"
+  author:
+    - Schulman, J.
+    - et al.
+  date: 2017
+  publisher: arXiv preprint arXiv:1707.06347
+  url: https://arxiv.org/abs/1707.06347
+

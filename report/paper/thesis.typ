@@ -11,22 +11,20 @@
   advisors: advisors,
   author: author,
   submissionDate: submissionDate,
-  abstract: include "/content/abstract_en.typ",
+  abstract_content: include "/content/abstract.typ",
   acknowledgement: include "/content/acknowledgement.typ",
 )
 
 #set par(justify: true)
 #include "/content/introduction.typ"
 #pagebreak()
-// #include "/content/model_design.typ"
-#pagebreak()
-#include "/content/data_preprocessing.typ"
-#pagebreak()
 #include "/content/model_architecture.typ"
 #pagebreak()
 #include "/content/model_implementation.typ"
 #pagebreak()
 #include "/content/model_evaluation.typ"
+#pagebreak()
+#include "/content/model_application.typ"
 #pagebreak()
 #include "/content/conclusion.typ"
 // #include "/content/background.typ"

@@ -1,106 +1,66 @@
-#import "/utils/todo.typ": TODO
+= Giới thiệu
 
-=  TỔNG QUAN  ĐỀ  TÀI
+Các Mô hình Ngôn ngữ Lớn (LLM) thể hiện năng lực học theo ngữ cảnh  ấn tượng, tận dụng thông tin từ đầu vào để đạt hiệu năng vượt trội trên nhiều bài toán hạ nguồn. Ví dụ, trong hội thoại nhiều lượt @roller2021recipes, @zhang2020dialogue, việc đưa lịch sử hội thoại vào ngữ cảnh giúp LLM phản hồi truy vấn của người dùng tốt hơn. Trong sinh văn bản tăng cường truy hồi (Retrieval-Augmented Generation -- RAG) @guu2020retrieval, @izacard2022few, LLM có thể sinh câu trả lời chính xác hơn bằng cách sử dụng các đoạn văn được truy hồi từ nguồn tri thức bên ngoài, như web hoặc cơ sở tri thức nội bộ.
 
-== Giới thiệu bài toán
-Phân loại cảm xúc là một bài toán quan trọng trong lĩnh vực Xử lý Ngôn ngữ Tự nhiên (Natural Language Processing - NLP), tập trung vào việc xác định và phân tích cảm xúc biểu đạt trong văn bản.
+Tuy nhiên, khi tăng độ dài prompt để khai thác ngữ cảnh, độ trễ suy luận và chi phí bộ nhớ đều tăng đáng kể @yen2024long. Cụ thể, prompt dài hơn yêu cầu thêm bộ nhớ cho bộ nhớ khoá–giá trị (KV cache), vốn tăng tuyến tính theo độ dài prompt. Hơn nữa, thời gian tới token đầu tiên (time-to-first-token, TTFT) tăng xấp xỉ bậc hai theo độ dài prompt, trong khi thời gian cho mỗi token tiếp theo (time-to-iterative-token, TTIT) tăng gần tuyến tính. Kết quả là thông lượng suy luận giảm khi ngữ cảnh dài, làm hạn chế khả năng áp dụng LLM trong các kịch bản đòi hỏi throughput cao và độ trễ thấp, như hệ thống tìm kiếm ở quy mô web hay các hệ thống agentic tương tác thời gian thực.
 
-Phân loại cảm xúc văn bản (Text Emotion Classification) không chỉ đơn thuần là việc xác định tính tích cực hay tiêu cực của một đoạn văn, mà còn bao gồm việc nhận diện các trạng thái cảm xúc phức tạp và tinh tế như vui vẻ, buồn bã, tức giận, sợ hãi, ngạc nhiên và ghê tởm.
+Tối ưu độ trễ suy luận cho LLM với ngữ cảnh rất dài hiện là vấn đề được nhiều chú ý, với nhiều tiếp cận khác nhau: thay đổi độ phức tạp của attention @beltagy2020longformer, làm thưa attention và ngữ cảnh @child2019generating, @xiao2024efficient, @jiang2024longllmlingua, hoặc thay đổi chiến lược đưa ngữ cảnh vào mô hình @yen2024long. Tuy nhiên, em cho rằng RAG là một trường hợp đặc biệt, cần được đối xử riêng thay vì nhìn như “LLM ngữ cảnh dài nói chung”.
 
-Sự bùng nổ của các nền tảng mạng xã hội và thương mại điện tử đã tạo ra một lượng dữ liệu văn bản khổng lồ chứa đựng thông tin cảm xúc phong phú từ người dùng. Theo thống kê, đến cuối năm 2019, Việt Nam đã có khoảng 48 triệu người dùng mạng xã hội, tạo ra một nguồn dữ liệu văn bản tiếng Việt đồ sộ cần được khai thác và phân tích. Việc hiểu được cảm xúc của người dùng không chỉ có giá trị trong nghiên cứu học thuật mà còn mang lại những ứng dụng thực tiễn quan trọng trong các lĩnh vực như:
+== Đặc thù của ngữ cảnh trong RAG
 
-- *Chăm sóc khách hàng*: Phân tích phản hồi, góp phần cải thiện chất lượng dịch vụ 
+Trong các hệ thống RAG, phần lớn ngữ cảnh mà LLM nhận được được tạo bằng cách nối nhiều đoạn truy hồi từ bộ nhớ ngoài (vector DB, công cụ tìm kiếm, v.v.). Khác với ngữ cảnh thuần văn bản liên tục (ví dụ như một chương sách), ngữ cảnh này có các đặc điểm rất đặc biệt mà nếu bỏ qua sẽ dẫn đến thiết kế hệ thống kém hiệu quả.
 
-- *Mạng xã hội*: Theo dõi xu hướng cảm xúc của người dùng để phát hiện các vấn đề tiềm ẩn hoặc nắm bắt cơ hội truyền thông.
 
-- *Tư vấn tâm lý*: Phát hiện và phân tích trạng thái cảm xúc, hỗ trợ trong quá trình chẩn đoán và trị liệu.
+Có ba đặc điểm chính như sau:
 
-Tiếng Việt, với tư cách là một ngôn ngữ thuộc nhóm tài nguyên hạn chế (low-resource language), đặt ra những thách thức đặc biệt cho bài toán phân loại cảm xúc văn bản. Khác với các ngôn ngữ Indo-European, tiếng Việt có cấu trúc ngữ pháp phức tạp với đặc điểm đơn lập, trong đó cùng một từ có thể mang nhiều nghĩa khác nhau tùy thuộc vào ngữ cảnh và thanh điệu. Sự đa dạng về từ vựng, cách diễn đạt cảm xúc, và các biểu hiện ngôn ngữ địa phương tạo nên một không gian ngữ nghĩa phong phú nhưng cũng đầy thách thức.
++ *Phân bổ token kém hiệu quả.*
 
-Hơn nữa, việc biểu đạt cảm xúc trong tiếng Việt thường mang tính ngầm ẩn và phụ thuộc nhiều vào văn hóa, khiến cho các mô hình truyền thống dựa trên từ điển cảm xúc hoặc các phương pháp học máy cổ điển gặp khó khăn trong việc nắm bắt được những sắc thái cảm xúc tinh tế này.
+  Ngữ cảnh RAG thường “thưa thông tin”: nhiều đoạn truy hồi không hữu ích cho truy vấn hiện tại, hoặc bị lặp lại giữa các truy vấn khác nhau. Tuy nhiên, nếu cứ đưa toàn bộ token vào LLM, hệ thống vẫn phải cấp bộ nhớ KV cache và tính toán attention cho tất cả các token này. Điều này dẫn tới lãng phí tài nguyên: chi phí cho những token không giúp ích cho câu trả lời lại chiếm phần lớn ngân sách thời gian và bộ nhớ.
+  
++ *Lãng phí thông tin đã được mã hoá trong pipeline truy hồi.*
 
+  Trước khi đến LLM sinh, pipeline RAG đã thực hiện nhiều bước xử lý: chia tài liệu thành các đoạn (chunk), mã hoá chúng thành vector, tính độ tương tự với truy vấn, re-rank, khử trùng lặp, v.v. Nghĩa là hệ thống đã có sẵn các embedding về từng đoạn và mức độ liên quan của chúng với truy vấn. Tuy nhiên, khi sinh câu trả lời, thường lại bỏ qua toàn bộ embedding này và chỉ đưa lại nguyên văn token của đoạn vào LLM. Thông tin đã được mã hoá và sắp xếp trước đó bị “vứt đi” ở bước quan trọng nhất là decoding.
+
++ *Cấu trúc chú ý thưa và bất thường.*
+
+  Do các bước đa dạng hoá, khử trùng lặp, và do bản chất khác nhau của các đoạn truy hồi, phần lớn các đoạn trong ngữ cảnh không liên quan trực tiếp với nhau. Phân tích các ma trận chú ý cho thấy attention giữa token thuộc cùng một đoạn thường lớn hơn rất nhiều so với attention giữa các đoạn khác nhau; ma trận chú ý có dạng gần "block-diagonal" @yen2024long. Điều này nghĩa là hầu hết attention chéo giữa các đoạn thực chất là gần như bằng 0, nhưng hệ thống vẫn phải trả chi phí tính toán đầy đủ.
+
+Ba yếu tố này gợi ý rằng: _Nếu vẫn coi RAG như một bài toán LLM ngữ cảnh dài tổng quát, sẽ bỏ lỡ những tối ưu rất rõ ràng_. Ngược lại, nếu thiết kế cơ chế giải mã (decoding) “nhìn thẳng” vào cấu trúc của ngữ cảnh RAG (rời rạc, nhiều đoạn, attention thưa, đã có embedding sẵn), có thể cắt giảm một lượng lớn phép tính mà gần như không ảnh hưởng tới chất lượng mô hình.
+
+== REFRAG: Giải mã có chọn lọc cho RAG
+
+Để giải quyết những thách thức trên, các nhà nghiên cứu từ Meta Superintelligence Labs đã đề xuất REFRAG (REpresentation For RAG), một khung giải mã hiệu quả được thiết kế riêng cho các ứng dụng RAG. Thay vì đối xử với RAG như một bài toán _ngữ cảnh dài tổng quát_, REFRAG khai thác các đặc điểm riêng của ngữ cảnh RAG để tối ưu hóa hiệu suất suy luận.
+
+Cách tiếp cận chính của REFRAG xoay quanh ba thay đổi quan trọng trong quá trình giải mã:
+
++ Thay vì đưa trực tiếp token của các đoạn truy hồi vào decoder, REFRAG tận dụng _embedding đoạn đã được nén_ – thường đã được tính sẵn trong pipeline truy hồi bằng encoder như RoBERTa.
+
++ Các chunk embedding này được chiếu vào không gian embedding token của decoder thông qua một projection layer và được đưa _trực tiếp_ vào LLM như thể đó là "token đặc biệt đại diện cho một đoạn".
+
++ Một chính sách học tăng cường (RL policy) gọn nhẹ được huấn luyện để quyết định đoạn nào nên mở rộng thành công token đầy đủ, đoạn nào chỉ cần giữ dạng embedding nén – cho phép điều chỉnh mức độ nén động theo thời điểm suy luận.
+
+Cách thiết kế này mang lại ba lợi ích chính:
+
+- *Rút ngắn chiều dài đầu vào của decoder:* số "vị trí chú ý" tỉ lệ với số đoạn (L) thay vì số token (s), giúp phân bổ ngân sách token hiệu quả hơn.
+- *Tái sử dụng embedding đã có:* không cần đưa token qua LLM để encoder nội bộ mã hoá lại; dùng trực tiếp embedding từ encoder bên ngoài, tiết kiệm tính toán.
+- *Giảm độ phức tạp chú ý:* chi phí attention giờ đây tăng bậc hai theo số đoạn, thay vì theo số token trong toàn bộ ngữ cảnh. Với mỗi đoạn dài $k$ token, có thể tiết kiệm tới xấp xỉ $k$ lần số vị trí.
+
+Theo bài báo REFRAG, mô hình đạt được những kết quả ấn tượng:
+
+- *$30.85 times$ tăng tốc thời gian đến token đầu tiên (TTFT)* (tương đương $3.75 times$ so với phương pháp trước đó CEPE) mà _không_ làm xấu đi perplexity;
+- Cho phép *mở rộng hiệu quả cửa sổ ngữ cảnh lên $16 times$* so với LLM gốc, nhờ đưa embedding đoạn vào thay vì token đầy đủ;
+- *$7 times$ tăng thông lượng suy luận* và có thể xử lý 80 đoạn với độ trễ tương đương với RAG tiêu chuẩn xử lý 10 đoạn.
 
 == Mục tiêu của đề tài
-Đề tài này nhằm mục đích khai thác sức mạnh của mô hình PhoBERT để giải quyết bài toán phân loại cảm xúc văn bản tiếng Việt một cách hiệu quả. Cụ thể, mục tiêu bao gồm:
 
-- Áp dụng PhoBERT trong nhận diện cảm xúc văn bản tiếng Việt.
+Bài báo REFRAG trình bày một tiếp cận hoàn toàn mới cho bài toán suy luận nhanh với RAG. Mục tiêu của em trong đề tài này là:
 
-- Khảo sát và tối ưu các kỹ thuật fine-tuning để nâng cao hiệu suất mô hình.
++ *Tìm hiểu sâu kiến trúc của REFRAG*: Phân tích cách mô hình nén, chiếu, và mở rộng có chọn lọc các đoạn ngữ cảnh, cùng với vai trò của từng thành phần (encoder RoBERTa, projection layer, policy network).
 
-- Đánh giá mô hình trên các tập dữ liệu chuẩn và so sánh với các phương pháp hiện có.
++ *Nghiên cứu quy trình huấn luyện 4 giai đoạn*: Khám phá lý do tại sao reconstruction task là bước khởi động quan trọng, làm thế nào continual pre-training kết hợp với curriculum learning, và cách RL policy được huấn luyện để tối ưu hóa sự cân bằng giữa tốc độ và chất lượng.
 
-- Phân tích ưu nhược điểm của mô hình trong bối cảnh tiếng Việt.
++ *Đánh giá hiệu suất trên các bài toán thực tế*: Kiểm chứng lại các kết quả báo cáo trên các tập dữ liệu RAG, hội thoại nhiều lượt, và tóm tắt tài liệu dài, đồng thời khám phá những ưu điểm và hạn chế của mô hình.
 
-== Phạm vi nghiên cứu của đề tài
-=== Phạm vi dữ liệu và ngôn ngữ
-Ngôn ngữ nghiên cứu: Văn bản tiếng Việt, với đặc điểm ngữ pháp đơn lập và biểu hiện cảm xúc phong phú, ngầm định.
++ *Xây dựng triển khai của REFRAG*: Cài đặt các thành phần chính của mô hình và tuning training pipeline để hiểu rõ hơn cách thức hoạt động và những yếu tố quyết định đến hiệu suất.
 
-Nguồn dữ liệu: Chủ yếu sử dụng tập dữ liệu UIT-VSMEC gồm 6.927 câu, gán nhãn theo 7 lớp cảm xúc (vui vẻ, buồn bã, tức giận, sợ hãi, ngạc nhiên, ghê tởm, và khác).
-
-Bổ sung dữ liệu: Có thể mở rộng sang các tập khác như UIT-VSFC hoặc các corpus cảm xúc công khai khác.
-
-=== Phạm vi về mô hình và phương pháp
-
-- *Mô hình chính*: PhoBERT-base và PhoBERT-large, dựa trên kiến trúc RoBERTa, tối ưu hóa cho tiếng Việt.
-
-- *Chiến lược fine-tuning*: Khảo sát các kỹ thuật như full fine-tuning, layer freezing, learning rate scheduling, gradient clipping, và regularization (dropout, label smoothing).
-
-- *Thiết kế phân loại*: So sánh các cấu trúc classification head (linear, MLP) và hàm loss (cross-entropy, focal loss).
-
-- *Tăng cường dữ liệu*: Ứng dụng các kỹ thuật như synonym replacement, back-translation để mở rộng tập huấn luyện.
-
-=== Phạm vi đánh giá
-- *Chỉ số đánh giá*: Sử dụng accuracy, precision, recall, macro-F1, weighted-F1 và confusion matrix.
-
-- *Chiến lược đánh giá*: Áp dụng stratified k-fold cross-validation và hold-out test set; thực hiện nhiều lần huấn luyện với các random seeds khác nhau.
-
-- *Phân tích kết quả*: Bao gồm error analysis, attention visualization và đánh giá khả năng tổng quát hóa.
-
-== Yêu cầu của đề tài
-=== Yêu cầu về hiệu suất mô hình
-- *Accuracy*: tối thiểu 85% trên tập test; hướng tới 90%.
-
-- *Macro-F1*: tối thiểu 75%, để đảm bảo hiệu quả với các lớp cảm xúc ít xuất hiện.
-
-- *Weighted-F1*: tối thiểu 80%, phản ánh hiệu suất tổng thể có trọng số.
-
-=== Yêu cầu về kiến trúc và triển khai
-- Bắt buộc sử dụng PhoBERT làm mô hình chính.
-
-- Áp dụng các kỹ thuật huấn luyện hiệu quả như mixed precision training, gradient accumulation, và early stopping.
-
-- Huấn luyện hoàn chỉnh mô hình trên GPU đơn lẻ (≥ 8GB VRAM) trong thời gian hợp lý.
-
-=== Yêu cầu về dữ liệu và tiền xử lý
-- Chia tập dữ liệu theo tỷ lệ 80-10-10 (train-validation-test), đảm bảo phân bố đồng đều các nhãn.
-
-- Áp dụng chuẩn hóa văn bản, xử lý dấu thanh, ký tự đặc biệt, từ viết tắt và biểu tượng cảm xúc.
-
-- Sử dụng tokenizer PhoBERT với encoding BPE và độ dài chuỗi tối đa 512 tokens.
-
-=== Yêu cầu về đánh giá và phân tích
-- So sánh hiệu suất với các baseline như SVM, Random Forest (TF-IDF), CNN, BiLSTM, mBERT, và XLM-R.
-
-- Phân tích lỗi theo lớp cảm xúc, độ dài câu, biểu hiện ngôn ngữ.
-
-- Thực hiện attention visualization và statistical significance testing.
-
-=== Yêu cầu về tái tạo và báo cáo
-- Cung cấp toàn bộ mã nguồn, hyperparameters và hướng dẫn tái tạo.
-
-- Thực hiện ablation study để đánh giá đóng góp của từng thành phần trong pipeline.
-
-- Báo cáo đầy đủ về tài nguyên tính toán sử dụng, hiệu suất huấn luyện và các giới hạn thực tiễn.
-
-== Phương pháp nghiên cứu
-Quy trình nghiên cứu gồm ba giai đoạn chính:
-
-- *Chuẩn bị dữ liệu*: Tiền xử lý văn bản tiếng Việt, xử lý mất cân bằng dữ liệu, và áp dụng các kỹ thuật tăng cường dữ liệu như synonym replacement, back-translation.
-
-- *Huấn luyện mô hình*: Sử dụng PhoBERT với kiến trúc classification head phù hợp, kết hợp kỹ thuật regularization, tuning siêu tham số và checkpointing.
-
-- *Đánh giá và phân tích*: Sử dụng các chỉ số định lượng (accuracy, F1-score), cùng các phương pháp định tính như error analysis và attention visualization để phân tích kết quả.
-
-== Kết luận chương
-Chương này đã trình bày tổng quan về bối cảnh, mục tiêu, phạm vi, yêu cầu và phương pháp nghiên cứu của đề tài. Việc kết hợp mô hình PhoBERT với đặc thù tiếng Việt hứa hẹn đem lại hiệu quả cao trong phân loại cảm xúc, đồng thời đóng góp vào việc phát triển các ứng dụng AI ngôn ngữ cho tiếng Việt. Những nội dung này sẽ là nền tảng cho các chương tiếp theo của báo cáo.
-
+Các phần sau sẽ trình bày chi tiết kiến trúc của REFRAG, thanh lọc quy trình huấn luyện, cơ chế chọn lọc mở rộng bằng RL, cũng như các kết quả thực nghiệm và nhận xét về mô hình.

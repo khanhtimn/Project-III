@@ -1,7 +1,7 @@
 #import "/layout/fonts.typ": *
 
 #let feedbacklog(
-  titleEnglish: "",
+  title: "",
   supervisor: "",
   advisors: (),
   author: "",
@@ -20,10 +20,10 @@
   set text(
     font: fonts.body, 
     size: 12pt, 
-    lang: "en"
+    lang: "vi"
   )
   
-  align(center, text(font: fonts.sans, 1.7em, weight: 700, "Presentation Feedbacklog" + linebreak() + titleEnglish))
+  align(center, text(font: fonts.sans, 1.7em, weight: 700, "Presentation Feedbacklog" + linebreak() + title))
 
   v(7.5mm)
 
